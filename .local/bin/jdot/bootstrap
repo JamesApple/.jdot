@@ -1,0 +1,7 @@
+#!/bin/sh
+
+config_directory=.jdot
+git_remote=git@github.com:JamesApple/$config_directory.git
+
+git clone --separate-git-dir=$HOME/.jdot $config_directory  $HOME/$config_directory-tmp
+rm -r ~/$config_directory-tmp/
