@@ -34,7 +34,7 @@ alias grep='() { $(whence -p grep) --color=auto $@ }'
 
 # jdot init --bare $HOME/.jdots
 # jdot config status.showUntrackedFiles no
-alias gdot='/usr/bin/git --git-dir=$HOME/.jdots --work-tree=$HOME'
+alias jdot='/usr/bin/git --git-dir=$HOME/.jdots --work-tree=$HOME'
 
 if [ -n "$ZSH_VERSION" ]; then
   alias -g X='| xargs'
