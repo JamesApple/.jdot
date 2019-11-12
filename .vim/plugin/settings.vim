@@ -12,6 +12,7 @@ set noswapfile                             " Disable using *.swp
 " set directory=~/.vim/tmp                   " Create global swp file in .vimtmp
 set path=$PWD/**                           " Add all folders in root to search path
 set visualbell                             " Flash instead of dinging
+set belloff=all
 
 set warn                                   " Issue a warning when running a shell command with unsaved changes
 set confirm                                " Failed commands will ask permission occasionally

@@ -1,24 +1,14 @@
-!Turn Caps Lock into another Control key
-!remove Lock = Caps_Lock
-!add Control = Caps_Lock
-
-!clear lock
-!clear control
-!keycode 66 = Control_L
-!add control = Control_L Control_R
-
-
 ! make caps_lock an additional control
 clear Lock
 keycode 66 = Control_L
 add Control = Control_L
- 
-! make escape be caps_lock
-!keysym Escape = Caps_Lock
-add Lock = Caps_Lock
- 
+
 ! make a fake escape key (so we can map it with xcape)
 keycode 999 = Escape
 
-
+! Use escape as tilde for small form keyboards
 keycode 9 = grave asciitilde
+
+
+! keycode 64 = Alt_L Meta_L Alt_L Meta_L
+! keycode 133 = Super_L NoSymbol Super_L
