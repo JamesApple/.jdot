@@ -1,6 +1,8 @@
 autoload -U colors && colors
 
 eval "$(fasd --init zsh-hook)"
+eval "$(pyenv init -)"
+
 
 export FZF_COMPLETION_TRIGGER='***'
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob  "!.git/"'
@@ -254,14 +256,16 @@ zle-line-init () {
 }
 
 
-source /usr/share/fzf/shell/key-bindings.zsh
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/zsh_completion"  # This loads nvm zsh_completion
 
 autoload -U +X bashcompinit && bashcompinit
-source  /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+
 
 
 # Experimental copy
@@ -304,3 +308,4 @@ local paste_widgets=(
 # NB: can atm. only wrap native widgets
 x11-clip-wrap-widgets copy $copy_widgets
 x11-clip-wrap-widgets paste  $paste_widgets
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

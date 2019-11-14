@@ -1,8 +1,11 @@
-export VISUAL=vimx
-export EDITOR=vimx
+export VISUAL=nvim
+export EDITOR=nvim
 alias e="$EDITOR"
 alias vim="$EDITOR"
 alias vi="$EDITOR"
+
+# allows
+alias sudo='sudo '
 
 alias c='clear'
 
@@ -15,26 +18,16 @@ fi
 alias d='docker'
 alias dc='docker-compose'
 
-# Coreutils overridden
 alias l='ls -1A'             # Show files in one column.
 alias ll='ls -lh'            # Show human readable.
 alias la='ls -lhA'           # Show hidden files.
-alias lx='ls -lhXB'          # Sort by extension.
-alias lk='ls -lhSr'          # Sort by size, biggest last.
-alias lc='ls -lhtcr'         # Sort by and show change time, most recent last.
-alias lu='ls -lhtur'         # Sort by and show access time, most recent last.
-alias lt='ls -lhtr'          # Sort by date, most recent last.
-alias lm='ls -lha | more'    # Pipe through 'more'.
-alias lr='ls -lhR'           # Recursive ls.
 alias sl='ls'                # I often screw this up.
-alias la='ls -A'
-alias ll='ls -l'
 
 alias grep='() { $(whence -p grep) --color=auto $@ }'
 
 # jdot init --bare $HOME/.jdots
 # jdot config status.showUntrackedFiles no
-alias jdot='/usr/bin/git --git-dir=$HOME/.jdots --work-tree=$HOME'
+alias jdot='/usr/bin/git --git-dir=$HOME/.jdot --work-tree=$HOME'
 
 if [ -n "$ZSH_VERSION" ]; then
   alias -g X='| xargs'

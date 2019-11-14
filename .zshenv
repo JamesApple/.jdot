@@ -5,6 +5,9 @@ export PATH=~/.local/tools:${PATH}
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$(go env GOPATH)/bin
 
+export PYENV_ROOT=$HOME/.installations/pyenv
+export PATH=$PYENV_ROOT/bin:$PATH
+
 ##
 # Always show root level VM's
 export LIBVIRT_DEFAULT_URI='qemu:///system'

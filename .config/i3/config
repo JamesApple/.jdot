@@ -2,7 +2,7 @@
 set $alt Mod1
 set $meta Mod4
 
-set $font pango:Fira Code 10
+set $font xft:Fura Code Nerd Font Mono 10
 
 set $workspace1 Main
 set $workspace2 Secondary
@@ -15,6 +15,11 @@ set $workspace8 8
 set $workspace9 9
 set $workspace10 10
 
+gaps inner 10
+gaps outer 10
+
+bindsym $meta+m gaps inner current plus 5
+bindsym $meta+Shift+m gaps inner current minus 5
 
 ##
 # Floating
@@ -60,6 +65,7 @@ bindsym $meta+Shift+l move right
 # Commands
 #
 bindsym $meta+q kill
+bindsym $meta+Shift+e exit
 
 # Reload the configuration file
 bindsym $meta+Shift+c reload 
