@@ -1,7 +1,19 @@
 autoload -U colors && colors
 
-eval "$(fasd --init zsh-hook)"
-eval "$(pyenv init -)"
+# Directory jumper
+if command -v fasd > /dev/null
+then
+  eval "$(fasd --init zsh-hook)"
+  j() {
+    local dir
+    dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
+  }
+fi
+
+if command -v pyenv > /dev/null
+then
+  eval "$(pyenv init -)"
+fi
 
 
 export FZF_COMPLETION_TRIGGER='***'
@@ -34,18 +46,7 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots) # Include hidden files.
 
-
-# Use lf to switch directories and bind it to ctrl-o
-lfcd () {
-    tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        rm -f "$tmp"
-        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
-    fi
-}
-# bindkey -s '^o' 'lfcd\n'
+source $(which aws_zsh_completer.sh)
 
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
@@ -181,10 +182,6 @@ bindkey '^e' edit-command-line
 fi
 
 
-j() {
-  local dir
-  dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
-}
 
 zle -N zle-line-init
 
@@ -309,3 +306,9 @@ local paste_widgets=(
 x11-clip-wrap-widgets copy $copy_widgets
 x11-clip-wrap-widgets paste  $paste_widgets
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+source $(which aws_zsh_completer.sh)

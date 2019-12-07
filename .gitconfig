@@ -1,6 +1,6 @@
 [user]
   name = JamesApple
-  email = James@JamesApple.com
+  email = james.apple@86400.com
 
 [color]
   diff = auto
@@ -41,3 +41,11 @@
   co = checkout
   br = branch
   brl = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+
+##
+# Archlinux
+#
+[url "https://aur.archlinux.org/"]
+  insteadOf = "aur:"
+[url "ssh://aur@aur.archlinux.org/"]
+  pushInsteadOf = "aur:"

@@ -2,6 +2,8 @@ if exists(':tnoremap')
   tnoremap   <ESC>      <C-\><C-n>
 endif
 
+inoremap <silent><expr> <c-space> coc#refresh()
+
 vnoremap <silent> ; :EasyAlign<cr>
 
 nmap <silent> <leader>l :call quickfix#ToggleList("Location List", 'l')<CR>

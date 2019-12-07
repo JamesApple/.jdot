@@ -1,8 +1,8 @@
 set $alt Mod1
 set $meta Mod4
-set $workspace1 Primary
-set $workspace2 Secondary
-set $workspace3 Tertiary
+set $workspace1 1
+set $workspace2 2
+set $workspace3 3
 set $workspace4 4
 set $workspace5 5
 set $workspace6 6
@@ -22,8 +22,9 @@ client.unfocused #bfbfbf #162025 #bfbfbf #193a48 #193a48
 client.urgent #bfbfbf #162025 #bfbfbf #193a48 #193a48
 client.placeholder #bfbfbf #162025 #bfbfbf #193a48 #193a48
 client.background #162025
-new_window pixel 1
-new_float normal
+# Incompatible with sway
+# new_window pixel 1
+# new_float normal
 hide_edge_borders none
 
 ##
@@ -72,7 +73,7 @@ bar {
   position top
   #status_command i3blocks
     mode dock
-    modifier None
+    #modifier None
     font $font
     colors {
         background #162025
@@ -107,11 +108,11 @@ bindsym $meta+minus scratchpad show
 ##
 # Floating / Stickiness
 #
-bindsym $meta+Return exec --no-startup-id ~/.local/bin/i3/kittyhere
+bindsym $meta+Return exec --no-startup-id ~/scripts/kittyhere
 bindsym $meta+Shift+f floating toggle; sticky toggle; exec --no-startup-id hover left
 floating_modifier $meta
-bindsym $meta+Shift+space floating toggle
-bindsym $meta+space focus mode_toggle 
+# bindsym $meta+Shift+space floating toggle
+# bindsym $meta+space focus mode_toggle 
 
 ##
 # Rearrangement
@@ -139,8 +140,8 @@ bindsym $meta+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortc
 ##
 # Misc Mappings
 #
-bindsym $meta+p exec ~/.local/tools/rofing
-bindsym $meta+Shift+p exec ~/.local/tools/rofing Picker
+bindsym $meta+space exec ~/scripts/rofing
+bindsym $meta+Shift+p exec ~/scripts/rofing Picker
 bindsym $meta+BackSpace exec espeak 'Locked' & i3lock -t -i ~/.lockscreen.png
 bindsym $meta+Shift+BackSpace exec espeak 'Logout' && i3-msg exit
 
@@ -166,6 +167,10 @@ bindsym $meta+Shift+5 move container to workspace $workspace5
 bindsym $meta+Shift+6 move container to workspace $workspace6
 bindsym $meta+Shift+7 move container to workspace $workspace7
 bindsym $meta+Shift+8 move container to workspace $workspace8
+bindsym $meta+Left move workspace to output left
+bindsym $meta+Right move workspace to output right
+bindsym $meta+Up move workspace to output up
+bindsym $meta+Down move workspace to output down
 
 
 ##

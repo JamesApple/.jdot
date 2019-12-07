@@ -64,6 +64,8 @@ set sidescrolloff=15                       " Keep window with cursor at least th
 set sidescroll=5                           " Keep window with cursor at least this far from the sides
 
 set shiftround                             " Round indents to multiple of shiftwidth (2, 4, 6 never 5, 3 or 1)
+set shiftwidth=2
+set tabstop=2
 
                                            " Use these characters to mimic hidden characters
 set list                                   " Show hidden chars

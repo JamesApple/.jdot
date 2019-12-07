@@ -1,7 +1,13 @@
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-export PATH=~/.local/tools:${PATH}
+if command -v sway > /dev/null
+then
+  export _JAVA_AWT_WM_NONREPARENTING=1
+fi
+
+
+export PATH=~/scripts:${PATH}
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$(go env GOPATH)/bin
 
@@ -13,3 +19,8 @@ export PATH=$PYENV_ROOT/bin:$PATH
 export LIBVIRT_DEFAULT_URI='qemu:///system'
 
 source ~/.aliases
+
+if command -v direnv > /dev/null
+then
+  eval "$(direnv hook zsh)"
+fi

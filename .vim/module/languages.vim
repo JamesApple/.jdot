@@ -22,6 +22,7 @@ let g:used_javascript_libs = 'react'
 
 Plug 'plasticboy/vim-markdown', { 'for': ['markdown'] }
 
+let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_autowrite = 1
 let g:vim_markdown_fenced_languages = [ 'csharp=cs', 'js=javascript' ]
 let g:vim_markdown_follow_anchor = 1

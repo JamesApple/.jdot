@@ -1,5 +1,3 @@
-"query:Release Notes:tags # \"release-notes\""
-
 # Data Engineering
 https://cloud.google.com/feeds/cloud-functions-release-notes.xml release-notes data-engineering
 https://cloud.google.com/feeds/cloud-dataprep-release-notes.xml release-notes data-engineering
