@@ -12,7 +12,6 @@ set noswapfile                             " Disable using *.swp
 " set directory=~/.vim/tmp                   " Create global swp file in .vimtmp
 set path=$PWD/**                           " Add all folders in root to search path
 set visualbell                             " Flash instead of dinging
-set belloff=all
 
 set warn                                   " Issue a warning when running a shell command with unsaved changes
 set confirm                                " Failed commands will ask permission occasionally
@@ -31,8 +30,8 @@ set noequalalways                          " Don't equalize windows when I chang
 set hidden                                 " Hide buffers instead of deleting
 set autoread                               " Always read from a file when it has been changed externally
 set colorcolumn=80                         " Highlight column at character width
-set winheight=10                           " Minimum height for focused window
-set winwidth=40                            " Minimum width for focused window
+" set winheight=10                           " Minimum height for focused window
+" set winwidth=40                            " Minimum width for focused window
 set number                                 " Display line numbers
 
 set conceallevel=2                         " Enable conceals for dirvish and more
@@ -56,16 +55,14 @@ set smartcase                              " Ovveride ignore case when capitals 
 set gdefault                               " Search / Substitution commands no longer need 'g'
 
 
-let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"       " Set block cursor escape sequence
-let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"       " Set line cursor escape sequence
+" let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"       " Set block cursor escape sequence
+" let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"       " Set line cursor escape sequence
 set cursorline                             " Highlight current line
 set scrolloff=999                          " Keep cursor in middle of screen
 set sidescrolloff=15                       " Keep window with cursor at least this far from top/bottom
 set sidescroll=5                           " Keep window with cursor at least this far from the sides
 
 set shiftround                             " Round indents to multiple of shiftwidth (2, 4, 6 never 5, 3 or 1)
-set shiftwidth=2
-set tabstop=2
 
                                            " Use these characters to mimic hidden characters
 set list                                   " Show hidden chars
@@ -92,7 +89,7 @@ if has("persistent_undo")
 endif
 
 if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
+  " let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  " let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  " set termguicolors
 endif

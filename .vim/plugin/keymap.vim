@@ -2,8 +2,6 @@ if exists(':tnoremap')
   tnoremap   <ESC>      <C-\><C-n>
 endif
 
-inoremap <silent><expr> <c-space> coc#refresh()
-
 vnoremap <silent> ; :EasyAlign<cr>
 
 nmap <silent> <leader>l :call quickfix#ToggleList("Location List", 'l')<CR>
@@ -40,10 +38,10 @@ inoremap <C-w>h <ESC><C-w>h
 nnoremap <silent> <C-w>t :tabnew<CR>
 
 " Disable Arrow Keys
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-noremap <Up> <NOP>
-noremap <Down> <NOP>
+inoremap <Left> <NOP>
+inoremap <Right> <NOP>
+inoremap <Up> <NOP>
+inoremap <Down> <NOP>
 
 
 " Indent entire file
@@ -54,7 +52,7 @@ nmap <silent> // :nohlsearch<CR>
 nnoremap g< :SidewaysLeft<CR>
 nnoremap g> :SidewaysRight<CR>
 
-nnoremap <silent><leader>f :ALEFix<CR>
+" nnoremap <silent><leader>f :ALEFix<CR>
 
 nnoremap <leader>tf :TestFile<CR>
 nnoremap <leader>tF :TestFile<CR>
@@ -71,6 +69,11 @@ nnoremap <leader>sT :Rg                  | " (s)earch (T)ext with regex
 nnoremap <silent> <leader><leader> :Files ~/notes/<CR>
 
 nmap o A<CR>
+
+" imap <Left> <Nop>
+" imap <Right> <Nop>
+" imap <Up> <Nop>
+" imap <Down> <Nop>
 
 " SURROUND:
 " I never use the native s mappings. I use c and r
@@ -94,6 +97,7 @@ xmap gS  <Plug>VgSurround
 nnoremap <leader>gA :!git add %<CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gd :Gvdiff<CR>
-nnoremap <leader>gps :Dispatch! git push<CR>
+" Pre push hooks make me angry
+nnoremap <leader>gps :Dispatch! git push --no-verify<CR>
 nnoremap <leader>gpl :Dispatch! git pull<CR>
 nnoremap <leader>gc :Gcommit<CR>

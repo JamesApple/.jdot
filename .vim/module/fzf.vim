@@ -1,7 +1,9 @@
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Executable
 Plug 'junegunn/fzf.vim'                                           " Mappings
 
-set runtimepath+=/usr/bin/fzf                               " Add FZF executable to runtime
+set runtimepath+=/usr/local/bin/fzf                               " Add FZF executable to runtime
+
+
 
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob  "!.git/"'                               " Default to fiels
 let g:fzf_buffers_jump = 1                                                                               " Jump to window with buffer if it exists

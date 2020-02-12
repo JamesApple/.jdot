@@ -14,6 +14,7 @@ set ignorecase " Case insensitive search
 set smartcase  " Non-case sensitive search
 set incsearch  " Incremental search
 set hlsearch   " Highlight search results
+set scrolloff = 999
 
 command! W w
 command! Q q
@@ -57,3 +58,6 @@ xmap gS  <Plug>VgSurround
 
 
 nnoremap <leader>rc :action Compile<CR>
+nnoremap <leader>ra :action RunAnything<CR>
+
+nnoremap <leader>cr :action de.netnexus.CamelCasePlugin.ToggleCamelCase<CR>

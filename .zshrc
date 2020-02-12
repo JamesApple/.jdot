@@ -1,20 +1,7 @@
+
 autoload -U colors && colors
 
-# Directory jumper
-if command -v fasd > /dev/null
-then
-  eval "$(fasd --init zsh-hook)"
-  j() {
-    local dir
-    dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
-  }
-fi
-
-if command -v pyenv > /dev/null
-then
-  eval "$(pyenv init -)"
-fi
-
+eval "$(fasd --init zsh-hook)"
 
 export FZF_COMPLETION_TRIGGER='***'
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob  "!.git/"'
@@ -24,6 +11,7 @@ HISTFILE="$HOME/.zsh_history"
 HISTSIZE=1000000
 SAVEHIST=1000000
 
+setopt EXTENDED_GLOB
 setopt BANG_HIST                 # Treat the '!' character specially during expansion.
 setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
 setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
@@ -39,17 +27,17 @@ setopt HIST_VERIFY               # Don't execute immediately upon history expans
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
 
-fpath=(~/.local/zsh-completions $fpath)
 autoload -Uz compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots) # Include hidden files.
 
-source $(which aws_zsh_completer.sh)
 
 autoload edit-command-line; zle -N edit-command-line
-bindkey '^e' edit-command-line
+bindkey '^x^e' edit-command-line
+
+export PATH="$HOME/cli-tools/aws:$HOME/cli-tools/local:${PATH}"
 
   setopt COMPLETE_IN_WORD    # Complete from both ends of a word.
   setopt ALWAYS_TO_END       # Move cursor to the end of a completed word.
@@ -182,133 +170,48 @@ bindkey '^e' edit-command-line
 fi
 
 
-
-zle -N zle-line-init
-
-
-# --- Colors ---
-# (String) => String
-function red ()     { print '%F{red}'"$1"'%f'     }
-function blue ()    { print '%F{blue}'"$1"'%f'    }
-function green ()   { print '%F{green}'"$1"'%f'   }
-function cyan ()    { print '%F{cyan}'"$1"'%f'    }
-function magenta () { print '%F{magenta}'"$1"'%f' }
-function yellow ()  { print '%F{yellow}'"$1"'%f'  }
-
-# --- Helpers ---
-function optionally-render-segment-by-count () {
-  # SIGNATURE ---
-  # Pattern needs to be able to be interpreted by RipGrep as a regular expression
-  # [Regex]
-  local pattern=$1     # '^[0-9]+ text'
-  # Icon can be any string
-  # [String]
-  local icon=$2        # ''
-  # Source text is searched using the pattern attribute
-  # [String]
-  local source_text=$3 #  '123 text to be searched'
-  # Color fn is a string that refers to a function that takes a string and returns a color wrapped string
-  # [FunctionRef (String) -> String]
-  local color_fn=$4    # 'yellow'
-  # => '| 123 '
-  # --------------
-
-  if [ -n $source_text ]; then
-    local count_from_applying_regex_to_source_text="$(echo $source_text | rg $pattern | wc -l | tr -d '[:space:]')"
-    if [ $count_from_applying_regex_to_source_text -ge 1 ]; then
-      local colored_icon="$("$color_fn" "$icon")"
-      print " | $colored_icon $count_from_applying_regex_to_source_text"
-    fi
-  fi
+j() {
+  local dir
+  dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
 }
 
+autoload -U promptinit; promptinit
+prompt pure
+zstyle :prompt:pure:path color white
 
-function update-git-command () {
-  # Check if we're not in a git repo
-  branch="$( git rev-parse --abbrev-ref HEAD 2&> /dev/null )"
-  if [ $? -eq 0 ]; then
-    local git_branch_indicator="$(yellow "$branch") "
-    # Run full status command
-    local latest_git_status="$(git status --porcelain=v2 --branch)"
+# AWS autocomplete
+source /usr/local/Cellar/awscli/1.16.260/libexec/bin/aws_zsh_completer.sh
 
-  fi
-}
+source <(kubectl completion zsh)
 
-# Called BEFORE a new line prompt line is written. This will currently insert a newline before the prompt
-precmd () { print '' }
-
-function set-prompt () {
-  local root_indicator='%(!.@root.)'
-  local newline=$'%1(l.\n.)'
-  local failure_indicator='%(?..'"$(red '> ')"')'
-  PS1="%B$failure_indicator$CURRENT_PATH$( red "$root_indicator" )$( echo ':' )$GIT_SEGMENT%b $newline"
-  zle reset-prompt
-}
-
-# Called every time a new prompt line is written
-zle-line-init () {
-  GIT_SEGMENT="$(update-git-command)"
-  CURRENT_PATH="$(pwd | sed 's_'"$HOME"'_'"$(blue '~')"'_')"
-  set-prompt
-}
-
-
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/zsh_completion"  # This loads nvm zsh_completion
 
+
+export FPATH=$FPATH:$HOME/.zsh/completion/
+
 autoload -U +X bashcompinit && bashcompinit
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+source  /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/jamesapple/ops/elastic-cloudwatch-services/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/jamesapple/ops/elastic-cloudwatch-services/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/jamesapple/ops/elastic-cloudwatch-services/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/jamesapple/ops/elastic-cloudwatch-services/node_modules/tabtab/.completions/sls.zsh
 
-# Experimental copy
-function x11-clip-wrap-widgets() {
-    # NB: Assume we are the first wrapper and that we only wrap native widgets
-    # See zsh-autosuggestions.zsh for a more generic and more robust wrapper
-    local copy_or_paste=$1
-    shift
-
-    for widget in $@; do
-        # Ugh, zsh doesn't have closures
-        if [[ $copy_or_paste == "copy" ]]; then
-            eval "
-            function _x11-clip-wrapped-$widget() {
-                zle .$widget
-                xclip -in -selection clipboard <<<\$CUTBUFFER
-            }
-            "
-        else
-            eval "
-            function _x11-clip-wrapped-$widget() {
-                CUTBUFFER=\$(xclip -out -selection clipboard)
-                zle .$widget
-            }
-            "
-        fi
-
-        zle -N $widget _x11-clip-wrapped-$widget
-    done
-}
-
-
-local copy_widgets=(
-    vi-yank vi-yank-eol vi-delete vi-backward-kill-word vi-change-whole-line
-)
-local paste_widgets=(
-    vi-put-{before,after}
-)
-
-# NB: can atm. only wrap native widgets
-x11-clip-wrap-widgets copy $copy_widgets
-x11-clip-wrap-widgets paste  $paste_widgets
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /Users/jamesapple/86400/crm/CRM-API/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/jamesapple/86400/crm/CRM-API/node_modules/tabtab/.completions/slss.zsh
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-source $(which aws_zsh_completer.sh)
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
+export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
+source <(kubectl completion zsh)
+source ~/.kubectl_fzf.plugin.zsh

@@ -1,11 +1,7 @@
 {
   "diagnostic.enable": true,
-  "solargraph.hover": true,
-  "solargraph.rename": true,
-  "solargraph.definitions": true,
-  "solargraph.formatting": true,
 
-  "snippets.ultisnips.usePythonx": true,
+  "snippets.ultisnips.usePythonx": false,
   "snippets.autoTrigger": true,
   "snippets.triggerCharacters": [".", "::"],
   "snippets.ultisnips.directories": [
@@ -26,6 +22,25 @@
     "http://json.schemastore.org/package": "package.json"
   },
 
+  "java.import.maven.enabled": true,
+  "java.format.enabled": true,
+  "java.format.settings.url": "/Users/jamesapple/.config/coc/extensions/node_modules/redhat.java/eclipse-formatter.xml",
+  "java.maven.downloadSources": true,
+  "java.completion.enabled": true,
+  "java.completion.guessMethodArguments": true,
+  "java.completion.overwrite": false,
+  "java.progressReports.enabled": true,
+  "java.autobuild.enabled": true,
+  "java.contentProvider.preferred": "fernflower",
+  "javascript.format.enabled": true,
+  "java.signatureHelp.enabled": true,
+  "java.implementationsCodeLens.enabled": true,
+  "java.referencesCodeLens.enabled": true,
+  "java.errors.incompleteClasspath.severity": "info",
+  "java.configuration.updateBuildConfiguration": "automatic",
+
+  "diagnostic.level": "information",
+
   "typescript.suggest.paths": true,
   "typescript.showUnused": true,
   "typescript.validate.enable": true,
@@ -34,12 +49,11 @@
   "typescript.suggestionActions.enabled": true,
   "typescript.suggest.enabled": true,
 
-  "languageserver":  {
+  "coc.preferences.colorSupport": true,
+  "highlight.colors.enable": true,
+  "highlight.document.enable": true,
 
-    "terraform": {
-      "command": "terraform-lsp",
-      "filetypes": ["terraform"]
-    },
+  "languageserver":  {
 
     "golang": {
       "command": "gopls",
@@ -47,21 +61,13 @@
       "filetypes": ["go"]
     },
 
-    //"dockerfile": {
-      //"command": "docker-langserver",
-      //"filetypes": ["dockerfile"],
-      //"args": ["--stdio"]
-    //},
-
-    "ccls": {
-      "command": "ccls",
-      "filetypes": ["c", "cpp", "objc", "objcpp"],
-      "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
-      "initializationOptions": {
-         "cache": {
-           "directory": "/tmp/ccls"
-         }
-       }
+    "dockerfile": {
+      "command": "docker-langserver",
+      "filetypes": ["dockerfile"],
+      "args": ["--stdio"]
     }
+
   }
+
+
 }

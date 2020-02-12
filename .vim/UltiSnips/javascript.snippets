@@ -1,5 +1,5 @@
-snippet it "It test block" b
-it('$1', () => {
+snippet it "It test block" bA
+it('$1', async () => {
 	${0:${VISUAL}}
 })
 endsnippet
@@ -10,18 +10,48 @@ describe('$1', () => {
 })
 endsnippet
 
-snippet contect "Context test block" b
+snippet beforeEach "BeforeEach test block" b
+beforeEach('$1', () => {
+	${0:${VISUAL}}
+})
+endsnippet
+
+snippet before "Before test block" b
+before('$1', () => {
+	${0:${VISUAL}}
+})
+endsnippet
+
+snippet after "After test block" b
+after('$1', () => {
+	${0:${VISUAL}}
+})
+endsnippet
+
+
+snippet afterEach "afterEach test block" b
+afterEach('$1', () => {
+	${0:${VISUAL}}
+})
+endsnippet
+
+
+snippet context "Context test block" b
 context('$1', () => {
 	${0:${VISUAL}}
 })
 endsnippet
 
-snippet expect "Expectation test" b
-expect($1)$2
+snippet afun "Function" bA
+function $1($2) { 
+	return $0
+}
 endsnippet
 
-snippet import "ES6 Import" b
-import ${1:React} from '${2:$1}'
+snippet fun "Function" bA
+function $1($2) { 
+	return $0
+}
 endsnippet
 
 snippet fn "Inline Function" Aw
@@ -30,9 +60,9 @@ snippet fn "Inline Function" Aw
 }
 endsnippet
 
-snippet sfc "Stateless Functional Component" b
-const ${1:Component} = (${2:props}) => {
-	const { $3 } = props
-	return (<${4:a} $5>$0</$4>)
+snippet afn "Inline Async Function" Aw
+async ($1) => { 
+	$0
 }
 endsnippet
+

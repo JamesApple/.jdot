@@ -12,3 +12,6 @@ let g:dirvish_git_indicators = {
 \ 'Ignored'   : '☒',
 \ 'Unknown'   : '?'
 \ }
+
+
+Plug 'christoomey/vim-tmux-navigator'

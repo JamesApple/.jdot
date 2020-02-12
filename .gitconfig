@@ -1,6 +1,22 @@
+[init]
+
 [user]
   name = JamesApple
-  email = james.apple@86400.com
+  email = james.apple@86400.com.au
+
+[core]
+  editor = nvim
+  whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+  excludesfile = ~/.gitignore
+
+[web]
+  browser = google-chrome
+
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
 
 [color]
   diff = auto
@@ -27,25 +43,96 @@
 [pull]
   default = current
 
+[merge]
+    tool = nvimdiff4
+    # if not using a tool name with builtin support, must supply mergetool cmd
+    # as below
+
+[mergetool "nvimdiff4"]
+    cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+
+[mergetool "nfugitive"]
+  cmd = nvim -f -c "Gdiff" "$MERGED"
+
+[diff]
+    tool = nvimdiff2
+
+[difftool "nvimdiff2"]
+    cmd = nvim -d $LOCAL $REMOTE
+
 [alias]
-  ps = push
+  ps = push --no-verify
   pl = pull
   f = fetch
 
   l = log --oneline
+  ll = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
   lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+  lgg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+
   a = add
   c = commit --verbose
+
+  ca = commit --amend --verbose
+
   d = diff
+  ds = diff --stat
+  dc = diff --cached
+
   s = status -sb
   co = checkout
+
   br = branch
+
+  # list branches sorted by last modified
   brl = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
 
-##
-# Archlinux
-#
-[url "https://aur.archlinux.org/"]
-  insteadOf = "aur:"
-[url "ssh://aur@aur.archlinux.org/"]
-  pushInsteadOf = "aur:"
+  # list aliases
+  la = "!git config -l | grep alias | cut -c 7-"
+
+  # Show
+  sts = "!f() { n=$(git stash list --max-count=1 --grep=$1 | cut -f1 -d":") ; if [[ -n "$n" ]] ; then git stash show "$n" ; else echo "Error: No stash matches $1" ; return 1 ; fi }; f"
+
+  # Apply
+  sta = "!f() { n=$(git stash list --max-count=1 --grep=$1 | cut -f1 -d":") ; if [[ -n "$n" ]] ; then git stash apply "$n" ; else echo "Error: No stash matches $1" ; return 1 ; fi }; f"
+
+  # Hub specific aliases
+  prs = pr list -f '[%sC%i%Creset] %sC%t%Creset:%NC %n%au:[%H] %ur %S %l %n%U %n%n'
+
+  tidy = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
+  # REVIEW
+  # Review between 'gh-pages' and the current branch
+  # REVIEW_BASE=gh-pages git stat
+
+  cb = "!git branch | sed 's_*__' | fzf | xargs -I % git checkout %"
+
+  # Churn
+  churn = !git --no-pager log --name-only --oneline | grep -v ' ' | sort | uniq -c | sort -nr | head
+
+  # Review changes made by the last commit of this branch:
+  # REVIEW_BASE=HEAD^ git stat
+
+  # list files which have changed since REVIEW_BASE
+  # (REVIEW_BASE defaults to 'master' in my zshrc)
+  files = "!git diff --name-only $(git merge-base HEAD \"$REVIEW_BASE\")"
+
+  # Same as above, but with a diff stat instead of just names
+  # (better for interactive use)
+  stat = "!git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")"
+
+  # NOTE: These aliases depend on the `git files` alias from
+  # a few sections ago!
+
+  # Open all files changed since REVIEW_BASE in Vim tabs
+  # Then, run fugitive's :Gdiff in each tab, and finally
+  # tell vim-gitgutter to show +/- for changes since REVIEW_BASE
+  ; review = "!nvim -p $(git files) +\"tabdo Gdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\""
+
+  # Same as the above, except specify names of files as arguments,
+  # instead of opening all files:
+  # git reviewone foo.js bar.js
+  reviewone = "!vim -p +\"tabdo Gdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\""
+[credential]
+	helper = store
+[url "git@github.com:"]
+	insteadOf = https://github.com/

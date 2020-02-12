@@ -14,3 +14,5 @@ Plug 'tpope/vim-sleuth'                                             " Never touc
 Plug 'tpope/vim-apathy'                                             " Path shenanigans
 Plug 'tpope/vim-scriptease', { 'for': ['vim'] }                     " Vim editing superpowers
 Plug 'tpope/vim-abolish'
+let g:abolish_save_file = expand('~/.vim/abolish_save_file')
+

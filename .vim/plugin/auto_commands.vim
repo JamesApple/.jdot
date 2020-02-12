@@ -30,8 +30,6 @@ augroup FTSettings
     au FileType gitcommit setlocal spell
     au FileType git,gitcommit setlocal foldmethod=syntax foldlevel=1
     au FileType sql setlocal shiftwidth=2 tabstop=2
-    au BufEnter *.snippets PyParensEnable
-    au BufLeave *.snippets PyParensDisable
 augroup END
 
 augroup FTMaps
