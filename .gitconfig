@@ -41,7 +41,7 @@
   defaultRemote = origin
 
 [pull]
-  default = current
+	default = current
 
 [merge]
     tool = nvimdiff4
@@ -82,7 +82,6 @@
   s = status -sb
   co = checkout
 
-  br = branch
 
   # list branches sorted by last modified
   brl = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
@@ -104,7 +103,8 @@
   # Review between 'gh-pages' and the current branch
   # REVIEW_BASE=gh-pages git stat
 
-  cb = "!git branch | sed 's_*__' | fzf | xargs -I % git checkout %"
+  ; br = branch
+  br = "!git branch | sed 's_*__' | fzf | xargs -I % git checkout %"
 
   # Churn
   churn = !git --no-pager log --name-only --oneline | grep -v ' ' | sort | uniq -c | sort -nr | head
@@ -114,11 +114,11 @@
 
   # list files which have changed since REVIEW_BASE
   # (REVIEW_BASE defaults to 'master' in my zshrc)
-  files = "!git diff --name-only $(git merge-base HEAD \"$REVIEW_BASE\")"
+  files = "!git diff --name-only $(git merge-base HEAD master)"
 
   # Same as above, but with a diff stat instead of just names
   # (better for interactive use)
-  stat = "!git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")"
+  stat = "!git diff --stat $(git merge-base HEAD master)"
 
   # NOTE: These aliases depend on the `git files` alias from
   # a few sections ago!
@@ -134,5 +134,9 @@
   reviewone = "!vim -p +\"tabdo Gdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\""
 [credential]
 	helper = store
-[url "git@github.com:"]
-	insteadOf = https://github.com/
+; [url "git@github.com:"]
+; 	insteadOf = https://github.com/
+; [branch]
+; 	autosetupmerge = always
+; [branch]
+; 	autoSetupMerge = always

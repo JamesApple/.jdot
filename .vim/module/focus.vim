@@ -1,1 +1,4 @@
-Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+if !exists('g:vscode')
+  Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+endif
+

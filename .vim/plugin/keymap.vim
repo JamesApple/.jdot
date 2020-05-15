@@ -38,10 +38,10 @@ inoremap <C-w>h <ESC><C-w>h
 nnoremap <silent> <C-w>t :tabnew<CR>
 
 " Disable Arrow Keys
-inoremap <Left> <NOP>
-inoremap <Right> <NOP>
-inoremap <Up> <NOP>
-inoremap <Down> <NOP>
+" inoremap <Left> <NOP>
+" inoremap <Right> <NOP>
+" inoremap <Up> <NOP>
+" inoremap <Down> <NOP>
 
 
 " Indent entire file

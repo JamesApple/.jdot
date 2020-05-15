@@ -1,14 +1,15 @@
 {
   "diagnostic.enable": true,
-
+  "snippets.ultisnips.pythonVersion": 3,
   "snippets.ultisnips.usePythonx": false,
-  "snippets.autoTrigger": true,
-  "snippets.triggerCharacters": [".", "::"],
+  "snippets.autoTrigger": false,
+  "snippets.triggerCharacters": [
+    ".",
+    "::"
+  ],
   "snippets.ultisnips.directories": [
     "~/.vim/UltiSnips"
   ],
-
-
   "yaml.trace.server": "verbose",
   "yaml.format.enable": true,
   "yaml.format.bracketSpacing": true,
@@ -18,10 +19,13 @@
   "yaml.format.singleQuote": true,
   "yaml.schemas": {
     "http://json.schemastore.org/ansible-stable-2.5": "ansibl*/**/*.y*l",
-    "kubernetes": ["kub*.y*l", "kub*/**/*.y*ml", "kub*/*.y*ml"],
+    "kubernetes": [
+      "kub*.y*l",
+      "kub*/**/*.y*ml",
+      "kub*/*.y*ml"
+    ],
     "http://json.schemastore.org/package": "package.json"
   },
-
   "java.import.maven.enabled": true,
   "java.format.enabled": true,
   "java.format.settings.url": "/Users/jamesapple/.config/coc/extensions/node_modules/redhat.java/eclipse-formatter.xml",
@@ -38,9 +42,7 @@
   "java.referencesCodeLens.enabled": true,
   "java.errors.incompleteClasspath.severity": "info",
   "java.configuration.updateBuildConfiguration": "automatic",
-
   "diagnostic.level": "information",
-
   "typescript.suggest.paths": true,
   "typescript.showUnused": true,
   "typescript.validate.enable": true,
@@ -48,26 +50,30 @@
   "typescript.implementationsCodeLens.enable": true,
   "typescript.suggestionActions.enabled": true,
   "typescript.suggest.enabled": true,
-
   "coc.preferences.colorSupport": true,
   "highlight.colors.enable": true,
   "highlight.document.enable": true,
-
-  "languageserver":  {
-
+  "languageserver": {
     "golang": {
       "command": "gopls",
-      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["go"]
+      "rootPatterns": [
+        "go.mod",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
+      "filetypes": [
+        "go"
+      ]
     },
-
     "dockerfile": {
       "command": "docker-langserver",
-      "filetypes": ["dockerfile"],
-      "args": ["--stdio"]
+      "filetypes": [
+        "dockerfile"
+      ],
+      "args": [
+        "--stdio"
+      ]
     }
-
   }
-
-
 }

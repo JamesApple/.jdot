@@ -16,31 +16,72 @@ fi
 
 alias d='docker'
 alias dc='docker-compose'
+
 alias k='kubectl'
+alias kd='k describe'
+alias kdel='k delete'
+alias ke='k edit'
+alias kg='k get'
+alias kgp='kg pods'
+alias kgd='kg deployments'
+alias kgsvc='kg services'
+alias kgsec='kg secrets'
+alias kgi='kg ingresses'
+
+# function kgg() {
+#   resource_type="${1:-deployments}"
+#   kg $resource_type | fzf --preview="kubectl describe $resource_type" --preview-window right:70%
+# }
+
+# Diff two resources
+# TODO: Figure out why vim isn't reading file descriptors from -d
+function kdiff() {
+  resource_type="${1:-pods}"
+  resource_list=$(k get $resource_type --no-headers )
+  first_resource=$(printf $resource_list | fzf  | awk '{print $1}')
+  if [ "$first_resource" != "" ]; then
+    second_resource=$(printf $resource_list | grep -v $first_resource | fzf  | awk '{print $1}')
+    if [ "$second_resource" != ""  ]; then
+      diff <(k describe $resource_type $first_resource) <(k describe $resource_type $second_resource)  | e
+    fi
+  fi 
+}
+
+function kns() {
+  if [[ "$1" != "" ]]; then
+    k config set-context --current --namespace $1
+    return
+  fi
+
+  ns=$(k get namespaces --no-headers | fzf | awk '{print $1}')
+  if [ "$ns" != "" ]; then
+    k config set-context --current --namespace $ns
+  fi
+}
+
+alias kctx='k config get-contexts -o name | fzf X% kubectl config use-context %'
+
+function ks() {
+  secret=$(k get secrets --no-headers | fzf | awk '{print $1}')
+
+  if [ $secret != "" ]; then
+    k get secret $secret \
+      -o go-template='{{range $k,$v := .data}}{{printf "%s: " $k}}{{if not $v}}{{$v}}{{else}}{{$v | base64decode}}{{end}}{{"\n"}}{{end}}'
+  fi
+}
+
 alias tf='terraform'
 
-# Coreutils overridden
-alias l='ls -1A'             # Show files in one column.
-alias ll='ls -lh'            # Show human readable.
-alias la='ls -lhA'           # Show hidden files.
-alias lx='ls -lhXB'          # Sort by extension.
-alias lk='ls -lhSr'          # Sort by size, biggest last.
-alias lc='ls -lhtcr'         # Sort by and show change time, most recent last.
-alias lu='ls -lhtur'         # Sort by and show access time, most recent last.
-alias lt='ls -lhtr'          # Sort by date, most recent last.
-alias lm='ls -lha | more'    # Pipe through 'more'.
-alias lr='ls -lhR'           # Recursive ls.
-alias sl='ls'                # I often screw this up.
-alias la='ls -A'
-alias ll='ls -l'
-
-alias grep='() { $(whence -p grep) --color=auto $@ }'
+alias l='ls -1A'        
+alias ll='ls -lh'           
+alias la='ls -lhA'         
+alias lr='ls -lhR'        
+alias sl='ls'            
 
 alias t='tmuxinator'
 alias tk='tmuxinator stop'
 alias ts='tmuxinator start'
 alias te='tmuxinator edit'
-alias tn='tmuxinator edit'
 
 
 # Clone
@@ -51,6 +92,10 @@ alias tn='tmuxinator edit'
 # jdot init --bare $HOME/.jdots
 # jdot config status.showUntrackedFiles no
 alias jdot='/usr/bin/git --git-dir=$HOME/.jdot --work-tree=$HOME'
+
+
+alias ecrlogin='aws ecr get-login --no-include-email --profile shrd --region=ap-southeast-2 | bash'
+alias ap='docker run --interactive --tty --rm --volume $HOME/.aws:/root/.aws --volume $PWD:/workdir 870762961795.dkr.ecr.ap-southeast-2.amazonaws.com/ansible-deployment ansible-playbook' 
 
 if [ -n "$ZSH_VERSION" ]; then
   alias -g X='| xargs'

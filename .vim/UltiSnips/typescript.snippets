@@ -1,52 +1,19 @@
 extends javascript
 
-snippet gcc "Gatsby Class Component" b
-import * as React from 'react'
+snippet test "sinon standard test" bA
+import sinon from 'sinon'
 
-import { graphql } from 'gatsby'
+describe("$1", () => {
+	let subject: $1
+	const sandbox = sinon.createSandbox()
 
-interface ${1/\w+\s*/\u$0/g}Props {
-	$3
-}
+	afterEach(sandbox.reset)
+	after(sandbox.reset)
 
-export const ${1/.*/\l$0/g}Query = graphql\`
-	query ${1/\w+\s*/\u$0/g}Query {
-		${3:site}
-	}
-\`
-
-export default class ${1:ComponentName} extends React.PureComponent<${1/\w+\s*/\u$0/g}Props, {}> {
-	public render() {
-		const { ${2} } = this.props
-		return ${0:<div />}
-	}
-}
-endsnippet
-
-snippet cc "Class Component" b
-import * as React from 'react'
-
-interface ${1/\w+\s*/\u$0/g}Props {
-	${3}
-}
-
-export default class ${1:ComponentName} extends React.PureComponent<${1/\w+\s*/\u$0/g}Props, {}> {
-	public render() {
-		const { ${2} } = this.props
-		return ${0:<div />}
-	}
-}
-endsnippet
-
-snippet story "Storybook story" b
-import * as React from 'react'
-
-import $1 from './$1'
-import { storiesOf } from '@storybook/react'
-
-storiesOf('${1:`!p snip.rv = snip.basename`}', module)
-	.add('Default', () => {
-		return <$1 ${2}/>
+	beforeEach(() => {
+		$2
 	})
 
+	$3
+})
 endsnippet

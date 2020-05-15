@@ -6,3 +6,7 @@ nnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>
 xnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>
 nnoremap <buffer> ef :!touch %
 nnoremap <buffer> ed :!mkdir -p %
+nnoremap <buffer> ex :Shdo  {}<Left><Left><Left>
+nnoremap <buffer> eX :Shdo!  {}<Left><Left><Left>
+
+nnoremap <buffer> . :echo 'Use eX or ex instead'<CR>

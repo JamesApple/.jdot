@@ -214,4 +214,4 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
 source <(kubectl completion zsh)
-source ~/.kubectl_fzf.plugin.zsh
+# source ~/.kubectl_fzf.plugin.zsh
