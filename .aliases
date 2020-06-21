@@ -97,9 +97,16 @@ alias jdot='/usr/bin/git --git-dir=$HOME/.jdot --work-tree=$HOME'
 alias ecrlogin='aws ecr get-login --no-include-email --profile shrd --region=ap-southeast-2 | bash'
 alias ap='docker run --interactive --tty --rm --volume $HOME/.aws:/root/.aws --volume $PWD:/workdir 870762961795.dkr.ecr.ap-southeast-2.amazonaws.com/ansible-deployment ansible-playbook' 
 
+alias p="find ~/86400 -type d -exec test -e '{}/.git' ';' -print -prune | fzf"
+
 if [ -n "$ZSH_VERSION" ]; then
   alias -g X='| xargs'
   alias -g X%='| xargs -I %'
   alias -g G='| rg '
+
+  alias __pick="fzf --multi | awk '{print \$1}'"
+
+  alias -g KGP='$(kgp | __pick)'
+  alias -g KGD='$(kgd | __pick)'
 fi
 

@@ -3,10 +3,8 @@
   "snippets.ultisnips.pythonVersion": 3,
   "snippets.ultisnips.usePythonx": false,
   "snippets.autoTrigger": false,
-  "snippets.triggerCharacters": [
-    ".",
-    "::"
-  ],
+  "snippets.triggerCharacters": [".", "::"],
+  // "~/.vim_plugged/ansible-vim/UltiSnips" Manually generate and write these
   "snippets.ultisnips.directories": [
     "~/.vim/UltiSnips"
   ],
@@ -16,16 +14,26 @@
   "yaml.hover": true,
   "yaml.validate": true,
   "yaml.completion": true,
-  "yaml.format.singleQuote": true,
+  "yaml.format.singleQuote": false,
   "yaml.schemas": {
-    "http://json.schemastore.org/ansible-stable-2.5": "ansibl*/**/*.y*l",
-    "kubernetes": [
-      "kub*.y*l",
-      "kub*/**/*.y*ml",
-      "kub*/*.y*ml"
-    ],
-    "http://json.schemastore.org/package": "package.json"
+    // "http://json.schemastore.org/ansible-stable-2.9": [  "*" ], Cant use due to invalid schemas...
+    "kubernetes": ["*"],
+    "https://raw.githubusercontent.com/softprops/serverless-yml-schema/master/serverless-schema.json": "serverless.yml"
   },
+  "json.schemas": [
+    {
+      "url": "http://json.schemastore.org/package",
+      "fileMatch": ["package.json"]
+    },
+    {
+      "url": "http://json.schemastore.org/tsconfig",
+      "fileMatch": ["*tsconfig*"]
+    },
+    {
+      "url": "http://json.schemastore.org/eslintrc",
+      "fileMatch": ["*eslintrc*"]
+    }
+  ],
   "java.import.maven.enabled": true,
   "java.format.enabled": true,
   "java.format.settings.url": "/Users/jamesapple/.config/coc/extensions/node_modules/redhat.java/eclipse-formatter.xml",
@@ -54,26 +62,5 @@
   "highlight.colors.enable": true,
   "highlight.document.enable": true,
   "languageserver": {
-    "golang": {
-      "command": "gopls",
-      "rootPatterns": [
-        "go.mod",
-        ".vim/",
-        ".git/",
-        ".hg/"
-      ],
-      "filetypes": [
-        "go"
-      ]
-    },
-    "dockerfile": {
-      "command": "docker-langserver",
-      "filetypes": [
-        "dockerfile"
-      ],
-      "args": [
-        "--stdio"
-      ]
-    }
   }
 }

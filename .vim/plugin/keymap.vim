@@ -1,26 +1,25 @@
-if exists(':tnoremap')
-  tnoremap   <ESC>      <C-\><C-n>
-endif
-
 vnoremap <silent> ; :EasyAlign<cr>
-
-nmap <silent> <leader>l :call quickfix#ToggleList("Location List", 'l')<CR>
-nmap <silent> <leader>q :call quickfix#ToggleList("Quickfix List", 'C')<CR>
-
-nnoremap <silent> Q <C-w>c
 
 nnoremap <silent> <C-w>z :call window#Zoom()<CR>
 
+" Use << to indent multiple times in visual
 vnoremap > >gv
 vnoremap < <gv
 
-nnoremap Y y$ 
+" Yank to the end of the line
+nnoremap Y y$
 
+" remove w prefix from window motions
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+inoremap <C-k> <ESC><C-w>k
+inoremap <C-j> <ESC><C-w>
+inoremap <C-l> <ESC><C-w>l
+inoremap <C-h> <ESC><C-w>h
 
+" If enter goes down, backspace should go up
 nnoremap <Backspace> -
 
 " Keep search results in center of screen
@@ -31,10 +30,7 @@ nmap # #zz
 nmap g* g*zz
 nmap g# g#zz
 
-inoremap <C-w>k <ESC><C-w>k
-inoremap <C-w>j <ESC><C-w>j
-inoremap <C-w>l <ESC><C-w>l
-inoremap <C-w>h <ESC><C-w>h
+
 nnoremap <silent> <C-w>t :tabnew<CR>
 
 " Disable Arrow Keys
@@ -43,37 +39,23 @@ nnoremap <silent> <C-w>t :tabnew<CR>
 " inoremap <Up> <NOP>
 " inoremap <Down> <NOP>
 
-
 " Indent entire file
 nnoremap == mzgg=G`z
 
+" Remove highlights on double tap /
 nmap <silent> // :nohlsearch<CR>
 
+" Slide function args
 nnoremap g< :SidewaysLeft<CR>
 nnoremap g> :SidewaysRight<CR>
 
-" nnoremap <silent><leader>f :ALEFix<CR>
-
-nnoremap <leader>tf :TestFile<CR>
-nnoremap <leader>tF :TestFile<CR>
-nnoremap <leader>tn :TestNearest<CR>
-nnoremap <leader>tp :TestLast<CR>
-nnoremap <leader>to :TestVisit<CR>
-
-nnoremap <silent><leader>sf :FZF<CR>     | " (s)earch (f)iles in repo
-nnoremap <silent><leader>sb :Buffers<CR> | " (s)earch (b)uffers
-nnoremap <silent><leader>sh :History<CR> | " (s)earch (h)istory
-nnoremap <silent><leader>st :Rg<CR>      | " (s)earch (t)ext
-nnoremap <leader>sT :Rg                  | " (s)earch (T)ext with regex
-
-nnoremap <silent> <leader><leader> :Files ~/notes/<CR>
+" (i)n (a)rgument
+omap aa <Plug>SidewaysArgumentTextobjA
+xmap aa <Plug>SidewaysArgumentTextobjA
+omap ia <Plug>SidewaysArgumentTextobjI
+xmap ia <Plug>SidewaysArgumentTextobjI
 
 nmap o A<CR>
-
-" imap <Left> <Nop>
-" imap <Right> <Nop>
-" imap <Up> <Nop>
-" imap <Down> <Nop>
 
 " SURROUND:
 " I never use the native s mappings. I use c and r
@@ -92,12 +74,7 @@ xmap s   <Plug>Vsurround
 xmap S   <Plug>VSurround
 xmap gS  <Plug>VgSurround
 
-
-" Add folder / File or interactive staging
-nnoremap <leader>gA :!git add %<CR>
-nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gd :Gvdiff<CR>
-" Pre push hooks make me angry
-nnoremap <leader>gps :Dispatch! git push --no-verify<CR>
-nnoremap <leader>gpl :Dispatch! git pull<CR>
-nnoremap <leader>gc :Gcommit<CR>
+" Exit terminal with escape
+if exists(':tnoremap')
+  tnoremap   <ESC>      <C-\><C-n>
+endif

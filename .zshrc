@@ -1,7 +1,9 @@
+# zmodload zsh/zprof # Profile startup times
 
 autoload -U colors && colors
 
 eval "$(fasd --init zsh-hook)"
+eval "$(pyenv init -)"
 
 export FZF_COMPLETION_TRIGGER='***'
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob  "!.git/"'
@@ -26,11 +28,13 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
-
 autoload -Uz compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-compinit
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
 _comp_options+=(globdots) # Include hidden files.
 
 
@@ -186,9 +190,23 @@ source <(kubectl completion zsh)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/zsh_completion"  # This loads nvm zsh_completion
+# Lazy load node
+declare -a NODE_GLOBALS=(`find ~/.nvm/versions/node -maxdepth 3 -type l -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
+
+NODE_GLOBALS+=("node")
+NODE_GLOBALS+=("nvm")
+NODE_GLOBALS+=("nvim")
+
+load_nvm () {
+    export NVM_DIR=~/.nvm
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/zsh_completion"  # This loads nvm zsh_completion
+}
+
+for cmd in "${NODE_GLOBALS[@]}"; do
+    eval "${cmd}(){ unset -f ${NODE_GLOBALS}; load_nvm; ${cmd} \$@ }"
+done
+
 
 
 export FPATH=$FPATH:$HOME/.zsh/completion/
@@ -215,3 +233,6 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
 source <(kubectl completion zsh)
 # source ~/.kubectl_fzf.plugin.zsh
+
+# zprof # Profile
+export PATH="$PATH:$HOME/go/bin"

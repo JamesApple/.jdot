@@ -36,6 +36,10 @@ set number                                 " Display line numbers
 
 set conceallevel=2                         " Enable conceals for dirvish and more
 
+" CoC Recommends not writing backup files on overwrite
+set nobackup
+set nowritebackup
+
 set diffopt=filler,vertical                " default behavior for diff
 
 set showtabline=2                          " Always show tabline
@@ -54,6 +58,12 @@ set ignorecase                             " Ignore letter case
 set smartcase                              " Ovveride ignore case when capitals are present
 set gdefault                               " Search / Substitution commands no longer need 'g'
 
+" always show signcolumns
+set signcolumn=yes
+set shortmess+=c
+
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
 
 " let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"       " Set block cursor escape sequence
 " let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"       " Set line cursor escape sequence
@@ -93,3 +103,6 @@ if exists('+termguicolors')
   " let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   " set termguicolors
 endif
+
+" Hidden Characters default to being invisible in my setup
+highlight Whitespace guifg=purple

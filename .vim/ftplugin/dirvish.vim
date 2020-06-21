@@ -9,4 +9,6 @@ nnoremap <buffer> ed :!mkdir -p %
 nnoremap <buffer> ex :Shdo  {}<Left><Left><Left>
 nnoremap <buffer> eX :Shdo!  {}<Left><Left><Left>
 
+nnoremap <buffer> eX :Shdo!  {}<Left><Left><Left>
+
 nnoremap <buffer> . :echo 'Use eX or ex instead'<CR>

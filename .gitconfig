@@ -73,7 +73,7 @@
   a = add
   c = commit --verbose
 
-  ca = commit --amend --verbose
+  capsf = "!git commit --amend --no-edit && git push --force"
 
   d = diff
   ds = diff --stat
