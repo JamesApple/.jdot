@@ -183,9 +183,6 @@ autoload -U promptinit; promptinit
 prompt pure
 zstyle :prompt:pure:path color white
 
-# AWS autocomplete
-source /usr/local/Cellar/awscli/1.16.260/libexec/bin/aws_zsh_completer.sh
-
 source <(kubectl completion zsh)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -231,8 +228,20 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
-source <(kubectl completion zsh)
 # source ~/.kubectl_fzf.plugin.zsh
 
 # zprof # Profile
 export PATH="$PATH:$HOME/go/bin"
+
+_direnv_hook() {
+  eval "$("/usr/local/bin/direnv" export zsh)";
+}
+typeset -ag precmd_functions;
+if [[ -z ${precmd_functions[(r)_direnv_hook]} ]]; then
+  precmd_functions+=_direnv_hook;
+fi
+
+
+export ANT_HOME=/Users/jamesapple/java-ant
+export PATH=$PATH:$ANT_HOME/bin
+

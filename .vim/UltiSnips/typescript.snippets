@@ -1,19 +1,17 @@
 extends javascript
 
-snippet test "sinon standard test" bA
-import sinon from 'sinon'
-
-describe("$1", () => {
-	let subject: $1
-	const sandbox = sinon.createSandbox()
-
-	afterEach(sandbox.reset)
-	after(sandbox.reset)
-
-	beforeEach(() => {
-		$2
-	})
-
-	$3
-})
+snippet class "Class" bA
+class $1 {
+	constructor($2) {}
+}
 endsnippet
+
+snippet Iclass "Injectable class" bA
+import { injectable } from 'tsyringe'
+
+@injectable()
+export class $1 {
+	constructor($2) {}
+}
+endsnippet
+

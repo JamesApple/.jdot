@@ -1,0 +1,38 @@
+snippet pkg "package" b
+package `!p 
+import os
+from xml.etree import ElementTree
+
+def get_package_name(pom_file_path):
+  namespaces = {'xmlns' : 'http://maven.apache.org/POM/4.0.0'}
+
+  tree = ElementTree.parse(pom_file_path)
+  root = tree.getroot()
+
+  groupId = root.find(".//xmlns:groupId", namespaces=namespaces)
+  artifactId = root.find(".//xmlns:artifactId", namespaces=namespaces)
+  return groupId.text + '.' + artifactId.text
+
+def find_nearest_pom():
+  current_file_dir = ''.join((os.getcwd() + ('/' if os.getcwd()[-1] != '/' else '') + path).split('/')[:-1])
+  absolute_path = current_file_dir.split("/")
+  pom_dir_index = -1
+
+  if os.path.isfile('/'.join(absolute_path) + '/pom.xml'):
+    return '/'.join(absolute_path) + '/pom.xml'
+
+  # Find index of 'base_dir_name' element
+  while not os.path.isfile('/'.join(absolute_path[:pom_dir_index]) + '/pom.xml'):
+    pom_dir_index -= 1
+
+  return '/'.join(absolute_path[:pom_dir_index]) + '/pom.xml'
+
+def get_file_package():
+  current_file_location = '.'.join((os.getcwd() + ('/' if os.getcwd()[-1] != '/' else '') + path).split('/')[:-1])
+  package = get_package_name(find_nearest_pom())
+  return package + current_file_location.split(package)[1]
+
+
+snip.rv = find_nearest_pom()
+`;
+endsnippet

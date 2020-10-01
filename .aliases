@@ -1,7 +1,16 @@
-#!/bin/sh
+# Clone
+# git clone --separate-git-dir=$HOME/.jdot git@github.com:JamesApple/.jdot.git  $HOME/.jdot-tmp
+# rm -rf ~/.jdot-tmp/€ý.
+
+# Brand new
+# jdot init --bare $HOME/.jdots
+# jdot config status.showUntrackedFiles no
+alias jdot='/usr/bin/git --git-dir=$HOME/.jdot --work-tree=$HOME'
+
 
 export VISUAL=nvim
 export EDITOR=nvim
+
 alias e="$EDITOR"
 alias vim="$EDITOR"
 alias vi="$EDITOR"
@@ -70,23 +79,26 @@ function ks() {
   fi
 }
 
+function j() {
+  local dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
+}
+
 alias tf='terraform'
 
-alias l='ls -1A'        
-alias ll='ls -lh'           
-alias la='ls -lhA'         
-alias lr='ls -lhR'        
-alias sl='ls'            
+alias l='ls -1A'
+alias ll='ls -lh'
+alias la='ls -lhA'
+alias lr='ls -lhR'
+alias sl='ls'
 
 alias t='tmuxinator'
 alias tk='tmuxinator stop'
 alias ts='tmuxinator start'
 alias te='tmuxinator edit'
 
-
 # Clone
 # git clone --separate-git-dir=$HOME/.jdot git@github.com:JamesApple/.jdot.git  $HOME/.jdot-tmp
-# rm -rf ~/.jdot-tmp/
+# rm -rf ~/.jdot-tmp/€ý.
 
 # Brand new
 # jdot init --bare $HOME/.jdots

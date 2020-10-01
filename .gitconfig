@@ -1,8 +1,8 @@
 [init]
 
 [user]
-  name = JamesApple
-  email = james.apple@86400.com.au
+	name = JamesApple
+	email = james@jamesapple.com
 
 [core]
   editor = nvim
@@ -41,7 +41,7 @@
   defaultRemote = origin
 
 [pull]
-	default = current
+  default = current
 
 [merge]
     tool = nvimdiff4
@@ -84,7 +84,7 @@
 
 
   # list branches sorted by last modified
-  brl = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+  brl = "!git for-each-ref --sort='-refname' --format='%09%(refname)%09%(authoremail)' refs/heads | sed -e 's-refs/heads/--' | column -t"
 
   # list aliases
   la = "!git config -l | grep alias | cut -c 7-"
@@ -104,7 +104,8 @@
   # REVIEW_BASE=gh-pages git stat
 
   ; br = branch
-  br = "!git branch | sed 's_*__' | fzf | xargs -I % git checkout %"
+  ; br = "!git branch | sed 's_*__' | fzf | xargs -I % git checkout %"
+  br = branch
 
   # Churn
   churn = !git --no-pager log --name-only --oneline | grep -v ' ' | sort | uniq -c | sort -nr | head

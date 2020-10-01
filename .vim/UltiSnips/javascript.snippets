@@ -1,43 +1,43 @@
 snippet it "It test block" bA
-it('$1', async () => {
+it('$1', async function() {
 	${0:${VISUAL}}
 })
 endsnippet
 
 snippet describe "Describe test block" bA
-describe('$1', () => {
+describe('$1',  function() {
 	${0:${VISUAL}}
 })
 endsnippet
 
 snippet beach "BeforeEach test block" bA
-beforeEach(() => {
+beforeEach( function() {
 	${0:${VISUAL}}
 })
 endsnippet
 
 snippet before "Before test block" bA
-before(() => {
+before( function() {
 	${0:${VISUAL}}
 })
 endsnippet
 
 snippet after "After test block" bA
-after(() => {
+after( function() {
 	${0:${VISUAL}}
 })
 endsnippet
 
 
 snippet aeach "afterEach test block" bA
-afterEach(() => {
+afterEach( function() {
 	${0:${VISUAL}}
 })
 endsnippet
 
 
 snippet context "Context test block" b
-context('$1', () => {
+context('$1',  function() {
 	${0:${VISUAL}}
 })
 endsnippet
@@ -66,3 +66,7 @@ async ($1) => {
 }
 endsnippet
 
+
+snippet xit "Pending Test" bA
+	xit('$1')
+endsnippet
