@@ -3,11 +3,17 @@
   "snippets.ultisnips.pythonVersion": 3,
   "snippets.ultisnips.usePythonx": false,
   "snippets.autoTrigger": false,
+  "prettier.eslintIntegration": true,
   "snippets.triggerCharacters": [".", "::"],
+  "diagnostic.virtualTextLines": 10,
+  "diagnostic.virtualText": true,
+  //"git.addGBlameToVirtualText": true,
+  //"git.virtualTextPrefix": "     ",
+  "diagnostic.virtualTextCurrentLineOnly": false,
   // "~/.vim_plugged/ansible-vim/UltiSnips" Manually generate and write these
-  "snippets.ultisnips.directories": [
-    "~/.vim/UltiSnips"
-  ],
+  "snippets.ultisnips.directories": ["~/.vim/UltiSnips"],
+  "snippets.loadFromExtensions": false,
+  "suggest.snippetIndicator": " ",
   "yaml.trace.server": "verbose",
   "yaml.format.enable": true,
   "yaml.format.bracketSpacing": true,
@@ -15,9 +21,11 @@
   "yaml.validate": true,
   "yaml.completion": true,
   "yaml.format.singleQuote": false,
+  "snippets.priority": 90,
+  "coc.source.ultisnips.priority": 90,
   "yaml.schemas": {
     // "http://json.schemastore.org/ansible-stable-2.9": [  "*" ], Cant use due to invalid schemas...
-    "kubernetes": ["*"],
+    //"kubernetes": ["*"],
     "https://raw.githubusercontent.com/softprops/serverless-yml-schema/master/serverless-schema.json": "serverless.yml"
   },
   "json.schemas": [
@@ -59,8 +67,30 @@
   "typescript.suggestionActions.enabled": true,
   "typescript.suggest.enabled": true,
   "coc.preferences.colorSupport": true,
-  "highlight.colors.enable": true,
-  "highlight.document.enable": true,
   "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "objc", "objcpp"],
+      "rootPatterns": [
+        ".ccls",
+        "compile_commands.json",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/ccls"
+        }
+      }
+    },
+
+    "terraform": {
+      "command": "terraform-lsp",
+      // "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {},
+      "settings": {}
+    }
   }
 }

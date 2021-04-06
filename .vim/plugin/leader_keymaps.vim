@@ -39,19 +39,16 @@ nnoremap <silent><leader>sh :History<CR>
 nnoremap <silent><leader>st :Rg<CR>
 
 
-" let g:wkm_space['space'] = {'name': 'Notes'}
-nnoremap <silent> <leader><leader> :Files ~/notes/<CR>
+" edit notes
+nnoremap <silent> <leader>en :Files ~/notes/<CR>
+nnoremap <leader>eN :e ~/notes/
+nnoremap <silent> <leader>e` :Files ~/<CR>
+nnoremap <leader>e~ :e ~/
+nnoremap <silent> <leader>es :Files ~/scripts<CR>
+nnoremap <leader>eS :e ~/scripts
 
 
 let g:wkm_space.v = {'name': '(v)im'}
 let g:wkm_space.v.r = 'Reload' | nnoremap <silent> <leader>vr :so $MYVIMRC<CR>
 
 
-let g:wkm_space.f = {'name': 'Format'}
-nmap <leader>f :call CocAction('format')<cr>
-
-
-let g:wkm_space.a = {'name': '(a)ction'}
-nnoremap <leader>af <Plug>(coc-fix-current)
-nnoremap <leader>rn <Plug>(coc-rename)
-nnoremap <leader>al <Plug>(coc-codeaction)

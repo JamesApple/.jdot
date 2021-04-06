@@ -8,14 +8,15 @@ nmap <buffer><expr>
 
 nmap <buffer> <CR> <Plug>(fern-open-or-expand-or-collapse)
 
-nmap <buffer> R <Plug>(fern-action-reload)
+" nmap <buffer> R <Plug>(fern-action-reload)
+nmap <buffer> R <Plug>(fern-action-reload:all)
 
 nmap <buffer> x <Plug>(fern-action-mark-toggle)
 nmap <buffer> dax <Plug>(fern-action-mark-clear)
 
 nnoremap <buffer> j j$
 nnoremap <buffer> k k$
-nmap <buffer> . :hi
+" nmap <buffer> . :hi
 
 nmap <buffer> ef <Plug>(fern-action-new-file)
 nmap <buffer> ed <Plug>(fern-action-new-dir)

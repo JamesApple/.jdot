@@ -1,35 +1,41 @@
-snippet it "It test block" bA
+snippet it "It test block" b
 it('$1', async function() {
 	${0:${VISUAL}}
 })
 endsnippet
 
-snippet describe "Describe test block" bA
-describe('$1',  function() {
+snippet describe "Describe test block" b
+describe('$1', async function() {
 	${0:${VISUAL}}
 })
 endsnippet
 
-snippet beach "BeforeEach test block" bA
+snippet step "Step test block" b
+step('$1', async () => {
+	${0:${VISUAL}}
+})
+endsnippet
+
+snippet beach "BeforeEach test block" b
 beforeEach( function() {
 	${0:${VISUAL}}
 })
 endsnippet
 
-snippet before "Before test block" bA
+snippet before "Before test block" b
 before( function() {
 	${0:${VISUAL}}
 })
 endsnippet
 
-snippet after "After test block" bA
+snippet after "After test block" b
 after( function() {
 	${0:${VISUAL}}
 })
 endsnippet
 
 
-snippet aeach "afterEach test block" bA
+snippet aeach "afterEach test block" b
 afterEach( function() {
 	${0:${VISUAL}}
 })
@@ -42,13 +48,13 @@ context('$1',  function() {
 })
 endsnippet
 
-snippet afun "Function" bA
-function $1($2) { 
+snippet afun "Function" b
+async function $1($2) { 
 	return $0
 }
 endsnippet
 
-snippet fun "Function" bA
+snippet fun "Function" b
 function $1($2) { 
 	return $0
 }
@@ -69,4 +75,10 @@ endsnippet
 
 snippet xit "Pending Test" bA
 	xit('$1')
+endsnippet
+
+snippet fori "C style for loop" b
+for (let i = 0; i < ${1:array}.length; i++) {
+	${2:$1[i]}
+}
 endsnippet

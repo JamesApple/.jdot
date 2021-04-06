@@ -1,12 +1,26 @@
 extends javascript
+global !p
+import re
 
-snippet class "Class" bA
-class $1 {
+def toCamel(string):
+  string = sub(r"(_|-)+", " ", string).title().replace(" ", "")
+  return string[0].lower() + string[1:]
+
+def toSnake(name):
+  name = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
+  return re.sub('([a-z0-9])([A-Z])', r'\1_\2', name).lower()
+
+def capitalizeFirstLetter(string):
+  return re.sub('([a-zA-Z])', lambda x: x.groups()[0].upper(), string, 1)
+endglobal
+
+snippet classs "Simple Class" bA
+export class $1 {
 	constructor($2) {}
 }
 endsnippet
 
-snippet Iclass "Injectable class" bA
+snippet classi "Injectable class" bA
 import { injectable } from 'tsyringe'
 
 @injectable()
@@ -15,3 +29,87 @@ export class $1 {
 }
 endsnippet
 
+
+snippet testit "testit" bA
+import { $1 } from "./$1"
+
+describe($1.name, function() {
+	const { getUnmocked, postgres } = setupIntegrationTests(this);
+
+	let subject: $1
+
+	beforeEach(() => {
+		subject = getUnmocked($1);
+	});
+
+	it("should $2", async function() {
+		$3
+	})
+})
+endsnippet
+
+snippet clt "tsyringe injected class" bA 
+import { injectable } from 'tsyringe';
+
+@injectable()
+export class $1 {
+	constructor($2) {}
+
+	run() {}
+}
+endsnippet
+
+snippet cle "(cl)ass (E)ntity" bA
+import { Entity } from 'designed'; 
+
+export class $1 extends Entity.Base {
+	$2
+}
+endsnippet
+
+snippet @ef "(cl)ass (f)ield (e)ntity" bA
+@Entity.Field() $1: $2
+endsnippet
+
+snippet @col "(cl)ass (f)ield (c)olumn" bA
+@Entity.Field() @Column({name: '`!p snip.rv = toSnake(t[1])`'}) $1: $2
+endsnippet
+
+
+snippet handler "Lambda handler for standard codebase" bA
+
+import 'reflect-metadata';
+import {
+	RequestHandler,
+	requestHandlerToAPIGatewayProxyHandler,
+} from '../../utils';
+import { errs } from '@zap-onboard/errors';
+
+export const $1: RequestHandler<any, any> = async (
+	body,
+	{ requestContext, container },
+) => {
+	$2
+	return {
+		body: null!,
+	};
+};
+
+export const handler = requestHandlerToAPIGatewayProxyHandler($1);
+endsnippet
+
+snippet useState "Description" bA
+const [${1:value}, set`!p snip.rv = capitalizeFirstLetter(t[1])`] = useState<${2:string}>(${3:''})
+endsnippet
+
+snippet ameth "async method" b
+	async ${1:method}() {
+		$2
+	}
+endsnippet
+
+snippet meth "async method" b
+	${1:method}() {
+		$2
+	}
+endsnippet

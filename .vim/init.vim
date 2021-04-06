@@ -1,8 +1,7 @@
 let g:mapleader = "\<Space>"
 
-let g:python_host_prog =  '/Users/jamesapple/.pyenv/versions/2.7.10/bin/python'
-let g:python3_host_prog = '/Users/jamesapple/.pyenv/versions/3.7.3/bin/python'
-let g:node_host_prog = expand('~/.nvm/versions/node/v12.13.1/bin/neovim-node-host')
+"let g:python_host_prog =  '/Users/jamesapple/.pyenv/versions/2.7.10/bin/python'
+"let g:node_host_prog = expand('~/.nvm/versions/node/v12.13.1/bin/neovim-node-host')
 
 " Reload vim on all changes
 augroup myvimrc
@@ -21,10 +20,10 @@ call plug#begin('~/.vim_plugged')
 runtime! plugin_config/**/*.vim
 call plug#end()
 
-" Disable Netrw
-let g:loaded_netrw       = 1
-let g:loaded_netrwPlugin = 1
+" " Disable Netrw
+" let g:loaded_netrw       = 1
+" let g:loaded_netrwPlugin = 1
 
 " TODO: Remove plugins in vscode config
-if !exists('g:vscode')
-endif
+" if !exists('g:vscode')
+" endif

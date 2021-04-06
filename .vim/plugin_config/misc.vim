@@ -21,3 +21,5 @@ Plug 'sheerun/vim-polyglot'
 Plug 'liuchengxu/vim-which-key'
 
 Plug 'junegunn/vim-peekaboo'
+
+Plug 'mboughaba/i3config.vim'

@@ -54,14 +54,4 @@ function! s:change_to_project(project)
   exec 'lcd '.a:project
 endfunction
 
-command! -nargs=* -bang Project call fzf#run(fzf#wrap({'sink': function('s:change_to_project'), 'source': "find ~/86400 -type d -exec test -e '{}/.git' ';' -print -prune"}))
-
-" function! s:make_sentence(lines)
-"   return substitute(join(a:lines), '^.', '\=toupper(submatch(0))', '').'.'
-" endfunction
-" inoremap <expr> <c-x><c-s> fzf#vim#complete({
-"   \ 'source':  'cat /usr/share/dict/words',
-"   \ 'reducer': function('<sid>make_sentence'),
-"   \ 'options': '--multi --reverse --margin 15%,0',
-"   \ 'left':    20})
-" ino
+command! Project call fzf#run(fzf#wrap({'sink': function('s:change_to_project'), 'source': "find ~/projects -type d -exec test -e '{}/.git' ';' -print -prune"}))

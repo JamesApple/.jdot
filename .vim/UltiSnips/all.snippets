@@ -1,1 +1,10 @@
+global !p
+from uuid import uuid4
 
+def genUUID():
+  return str(uuid4())
+endglobal
+
+snippet uuid "Make a uuid" wA
+`!p if not snip.c: snip.rv = genUUID()`
+endsnippet

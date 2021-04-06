@@ -3,6 +3,9 @@
 [user]
 	name = JamesApple
 	email = james@jamesapple.com
+	signingKey = BF747B474DA186DB
+[commit]
+  gpgSign = true
 
 [core]
   editor = nvim
@@ -42,6 +45,7 @@
 
 [pull]
   default = current
+  ff = only
 
 [merge]
     tool = nvimdiff4
@@ -89,14 +93,15 @@
   # list aliases
   la = "!git config -l | grep alias | cut -c 7-"
 
-  # Show
-  sts = "!f() { n=$(git stash list --max-count=1 --grep=$1 | cut -f1 -d":") ; if [[ -n "$n" ]] ; then git stash show "$n" ; else echo "Error: No stash matches $1" ; return 1 ; fi }; f"
+  ; # Show
+  ; sts = "!f() { n=$(git stash list --max-count=1 --grep=$1 | cut -f1 -d":") ; if [[ -n "$n" ]] ; then git stash show "$n" ; else echo "Error: No stash matches $1" ; return 1 ; fi }; f"
 
-  # Apply
-  sta = "!f() { n=$(git stash list --max-count=1 --grep=$1 | cut -f1 -d":") ; if [[ -n "$n" ]] ; then git stash apply "$n" ; else echo "Error: No stash matches $1" ; return 1 ; fi }; f"
+  ; # Apply
+  ; sta = "!f() { n=$(git stash list --max-count=1 --grep=$1 | cut -f1 -d":") ; if [[ -n "$n" ]] ; then git stash apply "$n" ; else echo "Error: No stash matches $1" ; return 1 ; fi }; f"
 
   # Hub specific aliases
-  prs = pr list -f '[%sC%i%Creset] %sC%t%Creset:%NC %n%au:[%H] %ur %S %l %n%U %n%n'
+  prs = pr list -f '[%sC%i%Creset] %sC%t%Creset: %n%au:[%H] %ur %S %l %n%U %n%n'
+  prco = "!hub pr list | fzf | egrep -o '[[:digit:]]+' | head -n 1 | xargs hub pr checkout"
 
   tidy = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
   # REVIEW
@@ -132,7 +137,11 @@
   # Same as the above, except specify names of files as arguments,
   # instead of opening all files:
   # git reviewone foo.js bar.js
-  reviewone = "!vim -p +\"tabdo Gdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\""
+  reviewone = "!nvim -p +\"tabdo Gdiff master\" +\"let g:gitgutter_diff_base = 'master'\""
+
+  npr = "!\
+    create-pull-request\
+    "
 [credential]
 	helper = store
 ; [url "git@github.com:"]
@@ -141,3 +150,5 @@
 ; 	autosetupmerge = always
 ; [branch]
 ; 	autoSetupMerge = always
+[branch]
+	autosetupmerge = true

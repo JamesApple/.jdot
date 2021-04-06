@@ -1,0 +1,12 @@
+[Unit]
+Description=Fetch the news
+RefuseManualStart=no
+RefuseManualStop=no
+
+[Timer]
+Persistent=true
+OnBootSec=120
+OnUnitActiveSec=3600
+
+[Install]
+WantedBy=timers.target

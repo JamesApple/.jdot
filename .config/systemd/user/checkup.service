@@ -1,0 +1,9 @@
+[Unit]
+Description=Checkup on installed packages
+
+[Service]
+Type=simple
+ExecStart=/home/james/scripts/cron/checkup
+
+[Install]
+WantedBy=default.target

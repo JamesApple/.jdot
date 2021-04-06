@@ -1,66 +1,37 @@
+https://news.ycombinator.com//rss
+
 https://aws.amazon.com/blogs/aws/feed/ aws
 
 https://cloudblog.withgoogle.com/products/gcp/rss/ gcp
+
+https://sookocheff.com/index.xml serverless
 
 https://cloud.google.com/feeds/cloud-functions-release-notes.xml release-notes serverless
 https://cloud.google.com/feeds/kubernetes-engine-release-notes.xml ops release-notes
 https://github.com/hashicorp/terraform/releases.atom release-notes ops release-notes
 
-# Golang
 https://scene-si.org/atom.xml golang
 https://rss.simplecast.com/podcasts/282/rss
 
 https://www.meetup.com/events/rss/243306134/0507e8ee9cda1d678690d6d92015fc5daa858f1e/going
 
-https://insomnia.rest/changelog/index.xml
-
-https://www.spaceflightinsider.com/launch-schedule/feed/
+https://viewsource.io/feed.xml
 
 # Youtube
-https://www.youtube.com/feeds/videos.xml?channel_id=UCrUL8K81R4VBzm-KOYwrcxQ
-https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA
-https://www.youtube.com/feeds/videos.xml?channel_id=UCTdw38Cw6jcm0atBPA39a0Q
-https://www.youtube.com/feeds/videos.xml?user=misterwootube
-https://www.youtube.com/feeds/videos.xml?user=Thunderf00t
-https://www.youtube.com/feeds/videos.xml?user=spacexchannel
-https://www.youtube.com/feeds/videos.xml?channel_id=UC8ENHE5xdFSwx71u3fDH5Xw
-https://www.youtube.com/feeds/videos.xml?channel_id=UCtxCXg-UvSnTKPOzLH4wJaQ
-https://www.youtube.com/feeds/videos.xml?user=ThoughtWorks
-https://www.youtube.com/feeds/videos.xml?channel_id=UC8ENHE5xdFSwx71u3fDH5Xw
-https://www.youtube.com/feeds/videos.xml?channel_id=UCp5CE3BD-fHc8rFqRJQklqA
-https://www.youtube.com/feeds/videos.xml?user=GotoConferences
-https://www.youtube.com/feeds/videos.xml?channel_id=UCFZ66zPdDvZ4KO3gkTduEig
-https://www.youtube.com/feeds/videos.xml?channel_id=UCCBVCTuk6uJrN3iFV_3vurg
-https://www.youtube.com/feeds/videos.xml?channel_id=UCvzMZyJZZ3XYQwbvOACVYrQ
+https://www.youtube.com/feeds/videos.xml?channel_id=UCrUL8K81R4VBzm-KOYwrcxQ LukeSmith
+https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA NDC
+https://www.youtube.com/feeds/videos.xml?channel_id=UCTdw38Cw6jcm0atBPA39a0Q EddieWoo
+https://www.youtube.com/feeds/videos.xml?user=Thunderf00t                    Thunderf00t
+https://www.youtube.com/feeds/videos.xml?user=spacexchannel                  Spacex
+https://www.youtube.com/feeds/videos.xml?channel_id=UCtxCXg-UvSnTKPOzLH4wJaQ CodingTech
+https://www.youtube.com/feeds/videos.xml?user=ThoughtWorks                   ThoughtWorks
+https://www.youtube.com/feeds/videos.xml?channel_id=UC8ENHE5xdFSwx71u3fDH5Xw ThePrimeagen
+https://www.youtube.com/feeds/videos.xml?channel_id=UCp5CE3BD-fHc8rFqRJQklqA CloudCoach
+https://www.youtube.com/feeds/videos.xml?user=GotoConferences                GOTOConference
+https://www.youtube.com/feeds/videos.xml?channel_id=UCFZ66zPdDvZ4KO3gkTduEig VoxxedDays
+https://www.youtube.com/feeds/videos.xml?channel_id=UCCBVCTuk6uJrN3iFV_3vurg Devoxx
+https://www.youtube.com/feeds/videos.xml?channel_id=UCvzMZyJZZ3XYQwbvOACVYrQ Devternity
 
+https://pcsupport.lenovo.com/au/en/products/laptops-and-netbooks/thinkpad-t-series-laptops/thinkpad-t590-type-20n4-20n5/20n4/20n4cto1ww/pf1znwc7?p=rss&source=psp
 
-
-https://www.reddit.com/r/vim/top.rss
-https://www.reddit.com/r/golang/top.rss
-https://www.reddit.com/r/java/top.rss
-https://www.reddit.com/r/javaexamples/top.rss
-https://www.reddit.com/r/node/top.rss
-https://www.reddit.com/r/devops/top.rss
-https://www.reddit.com/r/docker/top.rss
-https://www.reddit.com/r/elasticsearch/top.rss
-https://www.reddit.com/r/awscertifications/top.rss
-https://www.reddit.com/r/redhat/top.rss
-https://www.reddit.com/r/kubernetes/top.rss
-https://www.reddit.com/r/programmingcirclejerk/top.rss
-https://www.reddit.com/r/ansible/top.rss
-https://www.reddit.com/r/neovim/top.rss
-https://www.reddit.com/r/commandline/top.rss
-https://www.reddit.com/r/bash/top.rss
-https://www.reddit.com/r/softwarearchitecture/top.rss
-https://www.reddit.com/r/archlinux/top.rss
-https://www.reddit.com/r/jenkinsci/top.rss
-https://www.reddit.com/r/PostgreSQL/top.rss
-https://www.reddit.com/r/apachekafka/top.rss
-https://www.reddit.com/r/tmux/top.rss
-https://www.reddit.com/r/zsh/top.rss
-
-
-
-https://news.ycombinator.com//rss
-
-https://api.twitter.com/1/statuses/user_timeline.rss?screen_name=jamesappledev
+https://www.dancarlin.com/sync/4308085fd7ea90690a8 dan-carlin

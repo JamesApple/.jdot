@@ -1,0 +1,9 @@
+[Unit]
+Description=Update newsboat
+
+[Service]
+Type=simple
+ExecStart=/home/james/scripts/cron/newsup
+
+[Install]
+WantedBy=default.target

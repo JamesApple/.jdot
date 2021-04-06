@@ -1,0 +1,12 @@
+[Unit]
+Description=Run checkup task once a day
+RefuseManualStart=no
+RefuseManualStop=no
+
+[Timer]
+Persistent=true
+OnCalendar=daily
+Unit=checkup.service
+
+[Install]
+WantedBy=timers.target

@@ -1,15 +1,9 @@
-# Clone
-# git clone --separate-git-dir=$HOME/.jdot git@github.com:JamesApple/.jdot.git  $HOME/.jdot-tmp
-# rm -rf ~/.jdot-tmp/€ý.
-
-# Brand new
-# jdot init --bare $HOME/.jdots
-# jdot config status.showUntrackedFiles no
+# vim: filetype=zsh
+# Look up the atlassian dotfile bare git repo
 alias jdot='/usr/bin/git --git-dir=$HOME/.jdot --work-tree=$HOME'
 
-
-export VISUAL=nvim
-export EDITOR=nvim
+alias ip='ip -color=auto'
+alias diff='diff --color=auto'
 
 alias e="$EDITOR"
 alias vim="$EDITOR"
@@ -84,7 +78,7 @@ function j() {
 }
 
 alias tf='terraform'
-
+alias ls='ls --color=auto'
 alias l='ls -1A'
 alias ll='ls -lh'
 alias la='ls -lhA'
@@ -115,10 +109,14 @@ if [ -n "$ZSH_VERSION" ]; then
   alias -g X='| xargs'
   alias -g X%='| xargs -I %'
   alias -g G='| rg '
+  alias -g C='| xclip -selection clipboard '
+  alias -g E='| entr -c '
+  alias -g ES='| entr -cs '
 
   alias __pick="fzf --multi | awk '{print \$1}'"
 
   alias -g KGP='$(kgp | __pick)'
   alias -g KGD='$(kgd | __pick)'
 fi
+
 
