@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -e
+
+filename="$1"
+
+if [ ! -f $filename  ]; then
+  echo $filename does not exist or was not provided
+  exit 1
+fi
+tmpfile=$(mktemp --suffix='.html')
+
+
+grip $filename --export $tmpfile
+
+google-chrome-stable $tmpfile

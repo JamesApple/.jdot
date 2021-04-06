@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+# I have no PCSPKR module installed on my thinkpad. This script uses speaker
+# test to notify me by controlling pulseaudio instead
+
+pulse_sink=0
+inital_volume=$(pulsemixer --get-volume | awk '{print $1}')
+initially_muted=$([ "$(pulsemixer --get-mute)" = "1" ] && printf "yes")
+
+[ $initially_muted = "yes" ] && pactl set-sink-mute $pulse_sink false
+
+pactl set-sink-volume $pulse_sink 60%
+
+( speaker-test -t sine -f 1000 )& pid=$! ; sleep 0.1s ; kill -9 $pid
+
+pactl set-sink-volume $pulse_sink $inital_volume%
+
+[ $initially_muted = "yes" ] && pactl set-sink-mute $pulse_sink true
+

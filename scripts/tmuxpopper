@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+tmux set message-style bg=green,fg=black,align=centre,blink \; display 'Failure!' \; run -b "sleep 0.5; tmux set -u message-style"
+
+# tmux list-clients -F '#{client_tty}'
+# fill=blue bg=red align=centre
+# tmux display-message '#[fg=blue]hello'
+
+# tmux display '#[fill=blue bg=red align=centre]hello'
+# tmux set -q status-right-bg red
+# tmux set -q set-titles-string hi
+
+# tmux set "-q", *args, key, value)
+				# _run("display", *args, message)
+
+				# tmux set -g status-justify centre
+
+          # success:                "green",
+          # failed:                 "red",
+          # pending:                "yellow",
+          # default:                "green",
+          # "status-left-bg"  => nil,
+          #     "status-right-bg" => nil,
+          #     "status-left-fg"  => nil,
+          #     "status-right-fg" => nil,
+          #     "message-bg"      => nil,
+          #     "message-fg"      => nil,
+          #     "display-time"    => nil

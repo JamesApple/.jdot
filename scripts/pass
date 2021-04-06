@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+item_sorter='fzf --preview "1pass -l {}"'
+field_sorter='fzf'
+
+ARGS=()
+while (( "${#}" )); do
+	case "${1}" in
+		-r|--rofi)
+      item_sorter='rofi -dmenu -i' 
+			field_sorter='rofi -dmenu -i' 
+			shift
+			;;
+			*)
+				ARGS+=("${1}")
+				shift
+				;;
+	esac
+done
+set -- "${ARGS[@]:-}"
+unset ARGS
+
+item=${1:-"$(1pass | eval $item_sorter)"}
+
+field=${2:-"$(1pass -l "$item" | eval "$field_sorter")"}
+
+[[ ! -z "$item" ]] && [[ ! -z "$field" ]] && 1pass "$item" "$field"

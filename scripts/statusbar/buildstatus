@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+cache "buildstatus-$(basename $PWD)" --ttl 10 \
+hub ci-status -f "%S, %t|" | \
+  sed -r '
+    s/failure, /#[fg=red]/g;
+    s/success, /#[fg=green]/g;
+    s/pending, /#[fg=yellow]/g;
+    s/\|$//;
+    s/\|/#[fg=white]|/g;
+    s/-tests//g;'

@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+
+
+dropdown_with_id "google-chrome-stable --app=https://calendar.google.com/calendar/u/0/r" calendar.google.com__calendar_u_0_r

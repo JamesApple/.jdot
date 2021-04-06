@@ -1,0 +1,21 @@
+#!/bin/bash
+
+supply=BAT0
+battery_level=$(cat /sys/class/power_supply/$supply/capacity) || exit
+charging_status=$(cat /sys/class/power_supply/$supply/status)
+
+if [ "$charging_status" = "Charging" ]; then
+  echo battery charging
+elif [ "$battery_level" -le 15 ]; then
+  notify-send -a battery_check -u critical "Battery getting low. Battery level is ${battery_level}%!"
+  $HOME/scripts/beep
+elif [ "$battery_level" -le 5 ]; then
+  notify-send -u critical -a battery_check "Battery critical. Battery level is ${battery_level}%! Suspending..."
+  $HOME/scripts/beep
+  $HOME/scripts/beep
+  $HOME/scripts/beep
+  sleep 5
+  systemctl suspend
+fi
+
+echo Completed battery check at $battery_level with $charging_status

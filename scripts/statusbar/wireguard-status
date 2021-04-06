@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+trap "notify-send -a wireguard 'non-zero exit code in wireguard'" SIGINT SIGTERM ERR
+
+export AWS_REGION=ap-southeast-2
+export AWS_PROFILE=prod 
+
+get_instance_id () {
+  aws ec2 describe-instances | jq -r '.Reservations[].Instances[] | select(.Tags[].Value == "wireguard_vpn_instance") | .InstanceId'
+}
+
+open_prod () {
+  wg-quick up prod > /dev/null
+  aws ec2 start-instances --instance-ids "$(get_instance_id)" > /dev/null
+  notify-send -a wireguard "prod up" 
+}
+
+show_wg () {
+  notify-send -a wireguard "wg show" "$( prod_vpn_state && sudo wg show )"
+}
+
+close_prod () {
+  wg-quick down prod > /dev/null
+  aws ec2 stop-instances --instance-ids "$(get_instance_id)" > /dev/null
+  notify-send -a wireguard "prod down"
+}
+
+prod_vpn_state() {
+  cache "prod_vpn_state" --ttl 10  aws ec2 describe-instances | jq -r '.Reservations[].Instances[].State.Name'
+}
+
+case $BLOCK_BUTTON in
+    1) pgrep -x dunst >/dev/null && open_prod;;
+    2) pgrep -x dunst >/dev/null && show_wg;;
+    3) pgrep -x dunst >/dev/null && close_prod;;
+esac
+
+tempo="prod nonprod"
+
+icon=" "
+val="$(sudo wg show interfaces | fmt -1)"
+
+for is in $val; do
+  printf "<span color='#00ff00'>$icon</span>$is $(prod_vpn_state)"
+done
+
+if [ ! -z "$val" ]; then
+  printf "\n"
+fi
+
+if [ -z "$val" ]; then
+  printf "<span color='#aaa'>$icon</span>\n"
+fi
+
+

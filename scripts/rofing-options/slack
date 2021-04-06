@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+if xwininfo -tree -root | grep "(\"slack\" ";
+then
+	echo "Window detected."
+	i3 "[instance=\"slack\"] scratchpad show; [instance=\"slack\"] move position center"
+else
+	echo "Window not detected... spawning."
+	slack
+fi

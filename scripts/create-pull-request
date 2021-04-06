@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+target=master
+
+ARGS=()
+while (( "${#}" )); do
+	case "${1}" in
+		-b|--branch)
+			# Pull variables with a space
+			shift
+			(( "${#}")) && { target="${1}"; shift; }
+			;;
+			*)
+				ARGS+=("${1}")
+				shift
+				;;
+	esac
+done
+set -- "${ARGS[@]:-}"
+unset ARGS
+
+title=${1:-"Merge $(git rev-parse --abbrev-ref HEAD)"}
+
+hub pull-request -p -o -e -m \'$title\'  -b $target

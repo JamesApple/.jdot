@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+google-chrome-stable https://github.com/zap-onboard/zap-onboard-api

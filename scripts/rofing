@@ -1,0 +1,21 @@
+#!/bin/sh
+
+this_script=~/.local/tools/rofing
+rofing_options=~/scripts/rofing-options
+
+if [ "$#" -eq 0 ]; then
+  script_or_command=$(
+    ls $rofing_options | rofi -dmenu -i
+  )
+  if [ "$?" -eq 0 ]; then
+    maybe_script=$rofing_options/$script_or_command
+
+    if [ -f "$maybe_script" ]; then
+      $maybe_script
+    else
+
+       google-chrome-stable  "google.com/search?q=$script_or_command"
+    fi
+  fi
+fi
+

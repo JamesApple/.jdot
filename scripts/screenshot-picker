@@ -1,0 +1,22 @@
+#!/bin/sh
+
+option=$(printf "a selected area\\ncurrent window\\nfull screen\\na selected area (copy)\\ncurrent window (copy)\\nfull screen (copy)" | rofi -dmenu -l 6 -i -p "Screenshot which area?")
+
+# If it's not going to the clipboard, name the screenshot
+if [[ ! "$option" =~ .*"copy".* ]]; then
+	name=$(rofi -dmenu -i -p "Name your screenshot (omit extension)")
+	if [ "$name" = "" ]; then
+		name=screenshot-"$(date '+%y%m%d-%H%M-%S')"
+	fi
+	filename=$name.png
+fi
+
+
+case "$option" in
+	"a selected area") maim -s $filename ;;
+	"current window") maim -i "$(xdotool getactivewindow)" $filename ;;
+	"full screen") maim $filename ;;
+	"a selected area (copy)") maim -s | xclip -selection clipboard -t image/png ;;
+	"current window (copy)") maim -i "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png ;;
+	"full screen (copy)") maim | xclip -selection clipboard -t image/png ;;
+esac
