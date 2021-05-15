@@ -27,3 +27,9 @@ call plug#end()
 " TODO: Remove plugins in vscode config
 " if !exists('g:vscode')
 " endif
+
+" if(!empty(blob))
+let g:jdot_local_config_value = expand('%:p:h').'/..vimrc'
+if(!empty(glob(g:jdot_local_config_value)))
+  exec 'so'.g:jdot_local_config_value
+endif

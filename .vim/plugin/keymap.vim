@@ -19,6 +19,9 @@ inoremap <C-j> <ESC><C-w>
 inoremap <C-l> <ESC><C-w>l
 inoremap <C-h> <ESC><C-w>h
 
+nnoremap <C-n> :cnext<CR>
+nnoremap <C-p> :cprevious<CR>
+
 " If enter goes down, backspace should go up
 nnoremap <Backspace> -
 

@@ -76,26 +76,28 @@ snippet @col "(cl)ass (f)ield (c)olumn" bA
 endsnippet
 
 
-snippet handler "Lambda handler for standard codebase" bA
+snippet handler "Lambda handler for standard codebase" b
 
-import 'reflect-metadata';
-import {
-	RequestHandler,
-	requestHandlerToAPIGatewayProxyHandler,
-} from '../../utils';
+import { makeRequestHandler } from '../../utils';
 import { errs } from '@zap-onboard/errors';
+import { $1 } from '../$1'
+import { $4 } from '@zap-onboard/api-client'
 
-export const $1: RequestHandler<any, any> = async (
-	body,
-	{ requestContext, container },
-) => {
-	$2
-	return {
-		body: null!,
-	};
-};
+export const handler = makeRequestHandler<${5:undefined}, ${4:ResponseType}>(
+	{
+		path: '/${2:path}',
+		method: '${3:get}',
+	},
+	async ({ container, requestContext }) => {
 
-export const handler = requestHandlerToAPIGatewayProxyHandler($1);
+		const service = container.resolve($1)
+		service.$6
+
+		return {
+			body: null! as $4,
+		};
+	},
+);
 endsnippet
 
 snippet useState "Description" bA
